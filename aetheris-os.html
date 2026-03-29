@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AETHERIS OS</title>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#00e5ff"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<meta name="apple-mobile-web-app-title" content="AETHERIS"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind = { config: {} };
+</script>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "secondary-fixed": "#e8deff","on-primary": "#00363d","on-surface-variant": "#bac9cc","surface-variant": "#31353c","surface-container-highest": "#31353c","background": "#10141a","tertiary-container": "#00ee98","surface-bright": "#353940","secondary-container": "#5203d5","secondary-fixed-dim": "#cdbdff","primary-fixed-dim": "#00daf3","on-primary-fixed": "#001f24","on-tertiary": "#003920","on-secondary-fixed": "#20005f","primary-fixed": "#9cf0ff","inverse-primary": "#006875","on-background": "#dfe2eb","tertiary": "#abffcb","surface-tint": "#00daf3","on-secondary": "#370096","inverse-surface": "#dfe2eb","on-tertiary-container": "#00673f","outline-variant": "#3b494c","error": "#ffb4ab","secondary": "#cdbdff","surface-container-high": "#262a31","surface": "#10141a","on-error-container": "#ffdad6","tertiary-fixed": "#52ffac","on-tertiary-fixed": "#002111","primary-container": "#00e5ff","on-tertiary-fixed-variant": "#005231","on-primary-container": "#00626e","surface-container-low": "#181c22","inverse-on-surface": "#2d3137","on-primary-fixed-variant": "#004f58","outline": "#849396","surface-dim": "#10141a","on-error": "#690005","on-secondary-container": "#c0acff","tertiary-fixed-dim": "#00e290","on-surface": "#dfe2eb","error-container": "#93000a","on-secondary-fixed-variant": "#4f00d0","surface-container-lowest": "#0a0e14","primary": "#c3f5ff","surface-container": "#1c2026"
+      },
+      fontFamily: { "headline": ["Space Grotesk"], "body": ["Inter"], "label": ["Inter"] },
+      borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+    },
+  },
+}
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body { background-color: #10141a; color: #dfe2eb; font-family: 'Inter', sans-serif; min-height: 100dvh; }
+  .glow-sm { text-shadow: 0 0 10px rgba(0, 229, 255, 0.4); }
+  .glass-morphism { backdrop-filter: blur(12px); }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #10141a; }
+  ::-webkit-scrollbar-thumb { background: #00daf366; border-radius: 10px; }
+  input[type="range"] { -webkit-appearance: none; background: transparent; }
+  input[type="range"]::-webkit-slider-runnable-track { background: #1c2026; height: 4px; border-radius: 2px; }
+  input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 2px; background: #00e5ff; cursor: pointer; margin-top: -6px; box-shadow: 0 0 10px rgba(0,229,255,0.4); }
+  .page { display: none; min-height: 100dvh; }
+  .page.active { display: flex; flex-direction: column; }
+  .glass-card { background: rgba(38,42,49,0.4); backdrop-filter: blur(12px); }
+  .conic-gradient-pulse { background: conic-gradient(from 0deg at 50% 50%, transparent 0deg, #00e5ff 180deg, transparent 360deg); }
+  nav.bottom-nav a, nav.bottom-nav button { cursor: pointer; }
+  .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; }
+</style>
+</head>
+<body class="bg-background text-on-background">
+
+<!-- ============ PAGE 1: LOGIN ============ -->
+<div class="page active" id="page-login">
+  <main class="flex-1 flex items-center justify-center p-6 relative overflow-hidden">
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div class="absolute -top-1/4 -right-1/4 w-[600px] h-[600px] bg-primary-container/5 rounded-full blur-[120px]"></div>
+      <div class="absolute -bottom-1/4 -left-1/4 w-[600px] h-[600px] bg-secondary-container/5 rounded-full blur-[120px]"></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-6xl z-10">
+      <!-- Left Panel -->
+      <div class="hidden lg:flex lg:col-span-5 flex-col justify-center space-y-6">
+        <div class="space-y-2">
+          <span class="text-primary font-headline tracking-widest text-xs uppercase">System Architecture</span>
+          <h2 class="text-4xl font-headline font-bold text-on-surface leading-tight">Neural Link <br/>Synchronization</h2>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-surface-container-low p-5 rounded-xl space-y-3">
+            <div class="flex items-center space-x-2">
+              <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings:'FILL' 1;">sensors</span>
+              <span class="text-on-surface-variant text-[10px] font-headline uppercase tracking-wider">Active Node</span>
+            </div>
+            <div class="text-xl font-headline font-semibold text-on-surface">GEMINI_PRO_NODE</div>
+            <div class="flex items-center space-x-2">
+              <div class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed animate-pulse"></div>
+              <span class="text-tertiary-fixed text-[10px] font-medium uppercase tracking-tighter">Optimal Path</span>
+            </div>
+          </div>
+          <div class="bg-surface-container-low p-5 rounded-xl space-y-3">
+            <div class="flex items-center space-x-2">
+              <span class="material-symbols-outlined text-secondary text-sm" style="font-variation-settings:'FILL' 1;">speed</span>
+              <span class="text-on-surface-variant text-[10px] font-headline uppercase tracking-wider">Latency</span>
+            </div>
+            <div class="text-xl font-headline font-semibold text-on-surface">14.2ms</div>
+            <div class="text-on-surface-variant text-[10px] font-medium uppercase tracking-tighter">Cluster: US-CENTRAL-1</div>
+          </div>
+        </div>
+        <div class="bg-surface-container-lowest/50 border border-outline-variant/10 p-6 rounded-xl">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-[10px] font-headline text-on-surface-variant uppercase tracking-widest">Real-time Entropy Flux</span>
+            <span class="material-symbols-outlined text-primary-fixed-dim text-lg">query_stats</span>
+          </div>
+          <div class="h-16 flex items-end space-x-1">
+            <div class="flex-1 bg-primary/20 h-[40%] rounded-t-sm"></div>
+            <div class="flex-1 bg-primary/20 h-[60%] rounded-t-sm"></div>
+            <div class="flex-1 bg-primary/40 h-[45%] rounded-t-sm"></div>
+            <div class="flex-1 bg-primary/60 h-[80%] rounded-t-sm"></div>
+            <div class="flex-1 bg-primary-container h-[55%] rounded-t-sm"></div>
+            <div class="flex-1 bg-primary/50 h-[90%] rounded-t-sm"></div>
+            <div class="flex-1 bg-primary/30 h-[30%] rounded-t-sm"></div>
+            <div class="flex-1 bg-primary/40 h-[70%] rounded-t-sm"></div>
+          </div>
+        </div>
+      </div>
+      <!-- Right Panel: Login -->
+      <div class="lg:col-span-7 flex flex-col justify-center items-center">
+        <div class="w-full max-w-md bg-surface-container-high/40 glass-morphism p-10 rounded-[2rem] shadow-2xl space-y-8 border border-outline-variant/5">
+          <div class="text-center space-y-6">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-primary-container to-secondary-container rounded-3xl rotate-12 shadow-[0_0_40px_rgba(0,229,255,0.2)]">
+              <span class="material-symbols-outlined text-on-primary text-4xl -rotate-12" style="font-variation-settings:'FILL' 1;">psychology</span>
+            </div>
+            <div class="space-y-2">
+              <h1 class="text-3xl font-headline font-bold text-on-surface tracking-tight">KINETIC_INTEL</h1>
+              <p class="text-on-surface-variant font-body text-sm leading-relaxed max-w-[280px] mx-auto">Establish a high-fidelity link with your Gemini intelligence matrix.</p>
+            </div>
+          </div>
+          <div class="space-y-4">
+            <button onclick="goTo('page-restore')" class="w-full flex items-center justify-center space-x-3 py-4 px-6 bg-on-surface text-surface rounded-xl font-body font-semibold hover:bg-white transition-all transform active:scale-[0.98]">
+              <svg class="w-5 h-5" viewBox="0 0 24 24">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="currentColor"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="currentColor"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="currentColor"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="currentColor"/>
+              </svg>
+              <span>Login with Google</span>
+            </button>
+            <div class="relative flex items-center py-2">
+              <div class="flex-grow border-t border-outline-variant/20"></div>
+              <span class="flex-shrink mx-4 text-[10px] font-headline text-on-surface-variant uppercase tracking-widest">Protocol Check</span>
+              <div class="flex-grow border-t border-outline-variant/20"></div>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+              <div class="flex items-center justify-between p-4 bg-surface-container rounded-xl border border-outline-variant/5">
+                <div class="flex items-center space-x-3">
+                  <span class="material-symbols-outlined text-primary-fixed-dim text-lg">verified_user</span>
+                  <span class="text-xs font-medium text-on-surface-variant">End-to-End Encryption</span>
+                </div>
+                <span class="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
+              </div>
+              <div class="flex items-center justify-between p-4 bg-surface-container rounded-xl border border-outline-variant/5">
+                <div class="flex items-center space-x-3">
+                  <span class="material-symbols-outlined text-primary-fixed-dim text-lg">bolt</span>
+                  <span class="text-xs font-medium text-on-surface-variant">Accelerated Handshake</span>
+                </div>
+                <span class="material-symbols-outlined text-tertiary-fixed text-sm">check_circle</span>
+              </div>
+            </div>
+          </div>
+          <div class="text-center pt-2">
+            <a class="text-[10px] font-headline uppercase tracking-widest text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy &amp; Security Documentation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ============ PAGE 2: RESTORE ============ -->
+<div class="page" id="page-restore">
+  <header class="fixed top-0 w-full flex justify-between items-center px-6 h-16 bg-[#10141a]/60 backdrop-blur-xl z-50 shadow-[0_20px_40px_rgba(0,229,255,0.08)]">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center overflow-hidden">
+        <span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings:'FILL' 1;">psychology</span>
+      </div>
+      <span class="font-headline uppercase tracking-widest text-sm text-[#00E5FF] font-bold text-xl">KINETIC_INTEL</span>
+    </div>
+    <button class="material-symbols-outlined text-[#00E5FF] hover:bg-[#353940] transition-colors duration-300 p-2 rounded-lg">settings_input_component</button>
+  </header>
+  <main class="pt-24 pb-32 px-4 md:px-8 max-w-5xl mx-auto min-h-screen flex-1">
+    <!-- Left nav desktop -->
+    <div class="hidden lg:block fixed left-0 top-0 h-full w-72 py-8 bg-[#181c22]">
+      <div class="px-8 mb-12">
+        <div class="flex items-center gap-3 mb-8">
+          <div class="w-10 h-10 rounded-xl bg-primary-container/20 flex items-center justify-center">
+            <span class="material-symbols-outlined text-primary-container" style="font-variation-settings:'FILL' 1;">terminal</span>
+          </div>
+          <div>
+            <h4 class="font-headline text-[#00E5FF] font-black text-xs">GEMINI_PRO_NODE</h4>
+            <p class="text-[10px] text-slate-400">V.2.4.0</p>
+          </div>
+        </div>
+        <nav class="space-y-2">
+          <a onclick="goTo('page-login')" class="flex items-center gap-4 text-slate-400 pl-4 py-3 rounded-xl hover:bg-[#262a31] hover:text-white transition-all cursor-pointer"><span class="material-symbols-outlined text-xl">memory</span><span class="font-headline text-sm uppercase">Core_Engine</span></a>
+          <a onclick="goTo('page-controls')" class="flex items-center gap-4 text-slate-400 pl-4 py-3 rounded-xl hover:bg-[#262a31] hover:text-white transition-all cursor-pointer"><span class="material-symbols-outlined text-xl">psychology</span><span class="font-headline text-sm uppercase">Persona_Matrix</span></a>
+          <a class="flex items-center gap-4 text-[#00E5FF] border-l-2 border-[#00E5FF] pl-4 py-3 bg-[#00E5FF]/5 transition-all cursor-pointer"><span class="material-symbols-outlined text-xl">architecture</span><span class="font-headline text-sm uppercase">Reasoning_Node</span></a>
+          <a onclick="goTo('page-controls')" class="flex items-center gap-4 text-slate-400 pl-4 py-3 rounded-xl hover:bg-[#262a31] hover:text-white transition-all cursor-pointer"><span class="material-symbols-outlined text-xl">waves</span><span class="font-headline text-sm uppercase">Clarity_Filter</span></a>
+          <a onclick="goTo('page-diagnostic')" class="flex items-center gap-4 text-slate-400 pl-4 py-3 rounded-xl hover:bg-[#262a31] hover:text-white transition-all cursor-pointer"><span class="material-symbols-outlined text-xl">terminal</span><span class="font-headline text-sm uppercase">System_Logs</span></a>
+        </nav>
+      </div>
+      <div class="mt-auto px-8 absolute bottom-8 w-full">
+        <div class="p-4 bg-surface-container-high rounded-2xl border border-outline-variant/10">
+          <div class="flex items-center gap-2 mb-2">
+            <div class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed"></div>
+            <span class="text-[10px] uppercase font-bold text-on-surface-variant">LLM_HEALTH: OPTIMAL</span>
+          </div>
+          <div class="h-1 w-full bg-surface-container-highest rounded-full">
+            <div class="h-full w-[94%] bg-tertiary-fixed rounded-full"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lg:ml-72">
+      <!-- Status -->
+      <section class="mb-12">
+        <div class="bg-surface-container-low p-8 rounded-3xl flex flex-col md:flex-row md:items-end justify-between gap-6 relative overflow-hidden">
+          <div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/5 rounded-full blur-3xl -mr-20 -mt-20"></div>
+          <div class="relative z-10">
+            <h2 class="font-headline text-on-surface-variant uppercase tracking-widest text-xs mb-2">System Diagnostics</h2>
+            <h1 class="font-headline text-4xl font-bold text-on-surface">LLM Efficiency</h1>
+          </div>
+          <div class="flex-1 max-w-md w-full relative z-10">
+            <div class="flex justify-between items-end mb-4">
+              <span class="font-headline text-5xl font-black text-primary-container glow-sm">84.2<span class="text-xl font-medium text-outline">%</span></span>
+              <div class="flex flex-col items-end">
+                <span class="text-tertiary-fixed text-xs font-bold uppercase tracking-tighter flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span>Optimal State</span>
+                <span class="text-on-surface-variant text-[10px] mt-1">LATENCY: 42ms</span>
+              </div>
+            </div>
+            <div class="h-2 w-full bg-surface-container-highest rounded-full overflow-hidden">
+              <div class="h-full w-[84.2%] bg-gradient-to-r from-primary-container to-tertiary-fixed shadow-[0_0_15px_rgba(0,229,255,0.4)]"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+        <div class="bg-surface-container-high p-6 rounded-3xl hover:bg-surface-bright transition-all duration-300 group">
+          <div class="flex justify-between items-start mb-6">
+            <div class="p-3 bg-primary-container/10 rounded-2xl text-primary-container"><span class="material-symbols-outlined text-3xl">graphic_eq</span></div>
+            <label class="relative inline-flex items-center cursor-pointer"><input checked class="sr-only peer" type="checkbox"/><div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div></label>
+          </div>
+          <h3 class="font-headline text-xl font-bold mb-2">Restore Tono</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Ajustar para mayor formalidad y coherencia sintáctica en las respuestas generadas.</p>
+          <div class="flex gap-2"><span class="px-2 py-1 rounded bg-surface-container-lowest text-[10px] font-bold text-outline border border-outline-variant/10 uppercase">Formal</span><span class="px-2 py-1 rounded bg-surface-container-lowest text-[10px] font-bold text-outline border border-outline-variant/10 uppercase">Technical</span></div>
+        </div>
+        <div class="bg-surface-container-high p-6 rounded-3xl hover:bg-surface-bright transition-all duration-300 group">
+          <div class="flex justify-between items-start mb-6">
+            <div class="p-3 bg-secondary-container/10 rounded-2xl text-secondary"><span class="material-symbols-outlined text-3xl">psychology</span></div>
+            <label class="relative inline-flex items-center cursor-pointer"><input class="sr-only peer" type="checkbox"/><div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-secondary"></div></label>
+          </div>
+          <h3 class="font-headline text-xl font-bold mb-2">Reset Rol</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Limpiar la memoria de sesión para restaurar la Persona original del modelo sin sesgos acumulados.</p>
+          <div class="flex gap-2"><span class="px-2 py-1 rounded bg-surface-container-lowest text-[10px] font-bold text-outline border border-outline-variant/10 uppercase">Core Persona</span></div>
+        </div>
+        <div class="bg-surface-container-high p-6 rounded-3xl hover:bg-surface-bright transition-all duration-300 group">
+          <div class="flex justify-between items-start mb-6">
+            <div class="p-3 bg-tertiary-container/10 rounded-2xl text-tertiary-fixed-dim"><span class="material-symbols-outlined text-3xl">architecture</span></div>
+            <label class="relative inline-flex items-center cursor-pointer"><input checked class="sr-only peer" type="checkbox"/><div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-tertiary-fixed-dim"></div></label>
+          </div>
+          <h3 class="font-headline text-xl font-bold mb-2">Desbloquear Razonamiento</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Limpiar bucles lógicos y recursiones infinitas que degradan la capacidad de inferencia.</p>
+          <div class="flex gap-2"><span class="px-2 py-1 rounded bg-surface-container-lowest text-[10px] font-bold text-outline border border-outline-variant/10 uppercase">Logic Purge</span></div>
+        </div>
+        <div class="bg-surface-container-high p-6 rounded-3xl hover:bg-surface-bright transition-all duration-300 group">
+          <div class="flex justify-between items-start mb-6">
+            <div class="p-3 bg-primary-container/10 rounded-2xl text-primary-fixed-dim"><span class="material-symbols-outlined text-3xl">waves</span></div>
+            <label class="relative inline-flex items-center cursor-pointer"><input class="sr-only peer" type="checkbox"/><div class="w-11 h-6 bg-surface-container-highest rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-fixed-dim"></div></label>
+          </div>
+          <h3 class="font-headline text-xl font-bold mb-2">Filtro de Claridad</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed mb-4">Reducir el ruido en los outputs mediante la aplicación de capas de normalización semántica.</p>
+          <div class="flex gap-2"><span class="px-2 py-1 rounded bg-surface-container-lowest text-[10px] font-bold text-outline border border-outline-variant/10 uppercase">High Fidelity</span></div>
+        </div>
+      </div>
+      <div class="flex justify-center mt-8">
+        <button onclick="goTo('page-controls')" class="w-full max-w-lg bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold py-6 px-10 rounded-2xl shadow-[0_0_30px_rgba(0,229,255,0.25)] hover:shadow-[0_0_50px_rgba(0,229,255,0.4)] transition-all duration-500 flex items-center justify-center gap-4 group">
+          <span class="text-xl uppercase tracking-widest">Confirmar e Implementar Solución</span>
+          <span class="material-symbols-outlined text-2xl group-hover:translate-x-2 transition-transform duration-300">rocket_launch</span>
+        </button>
+      </div>
+    </div>
+  </main>
+  <nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe px-4 bg-[#10141a]/80 backdrop-blur-lg shadow-2xl rounded-t-2xl bottom-nav">
+    <a onclick="goTo('page-login')" class="nav-item text-slate-500 hover:text-[#c3f5ff] transition-all cursor-pointer"><span class="material-symbols-outlined">account_tree</span><span class="font-body text-[10px] font-medium tracking-tight mt-1">Connect</span></a>
+    <a class="nav-item text-[#00E5FF] bg-[#00E5FF]/10 rounded-xl px-4 py-1"><span class="material-symbols-outlined">settings_backup_restore</span><span class="font-body text-[10px] font-medium tracking-tight mt-1">Restore</span></a>
+    <a onclick="goTo('page-diagnostic')" class="nav-item text-slate-500 hover:text-[#c3f5ff] transition-all cursor-pointer"><span class="material-symbols-outlined">query_stats</span><span class="font-body text-[10px] font-medium tracking-tight mt-1">Metrics</span></a>
+    <a onclick="goTo('page-forge')" class="nav-item text-slate-500 hover:text-[#c3f5ff] transition-all cursor-pointer"><span class="material-symbols-outlined">history_edu</span><span class="font-body text-[10px] font-medium tracking-tight mt-1">Forge</span></a>
+  </nav>
+</div>
+
+<!-- ============ PAGE 3: CONTROLS ============ -->
+<div class="page" id="page-controls">
+  <header class="fixed top-0 w-full z-50 bg-[#10141a]/60 backdrop-blur-xl bg-gradient-to-b from-[#181c22] to-transparent shadow-[0_20px_40px_rgba(0,218,243,0.08)]">
+    <div class="flex items-center justify-between px-6 h-20 w-full">
+      <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-cyan-400 text-2xl">terminal</span>
+        <h1 class="font-headline tracking-tight text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#c3f5ff] to-[#00e5ff]">AETHERIS OS</h1>
+      </div>
+      <div class="flex items-center gap-6">
+        <nav class="hidden md:flex gap-8 font-headline text-sm font-medium">
+          <a onclick="goTo('page-login')" class="text-slate-500 hover:text-cyan-300 transition-colors duration-300 cursor-pointer">NETWORK</a>
+          <a class="text-cyan-400 drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">CONTROLS</a>
+          <a onclick="goTo('page-diagnostic')" class="text-slate-500 hover:text-cyan-300 transition-colors duration-300 cursor-pointer">MODELS</a>
+        </nav>
+        <div class="h-10 w-10 rounded-full border border-primary/20 bg-surface-container-high overflow-hidden flex items-center justify-center">
+          <span class="material-symbols-outlined text-primary text-lg" style="font-variation-settings:'FILL' 1;">person</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <main class="flex-grow pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <section class="lg:col-span-7 space-y-6">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-primary-container">tune</span>
+        <h2 class="font-headline text-xl font-bold tracking-tight uppercase text-on-surface">Behavioral Controls</h2>
+      </div>
+      <div class="grid grid-cols-1 gap-4">
+        <div class="bg-surface-container-low rounded-xl p-6 border-l-2 border-primary-container/30">
+          <div class="flex justify-between items-center mb-6">
+            <label class="font-headline text-sm font-medium tracking-wide flex items-center gap-2"><span class="material-symbols-outlined text-xs text-secondary">psychology</span>CREATIVITY VS LOGIC</label>
+            <span class="text-primary text-xs font-mono bg-primary/10 px-2 py-1 rounded">65% CREATIVE</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-[10px] font-mono text-on-surface-variant">DETERMINISTIC</span>
+            <input class="flex-grow" max="100" min="0" type="range" value="65"/>
+            <span class="text-[10px] font-mono text-on-surface-variant">STOCHASTIC</span>
+          </div>
+          <p class="mt-4 text-xs text-on-surface-variant font-light leading-relaxed">Adjust the balance between analytical reasoning and generative expression.</p>
+        </div>
+        <div class="bg-surface-container-low rounded-xl p-6 border-l-2 border-tertiary-fixed/30">
+          <div class="flex justify-between items-center mb-6">
+            <label class="font-headline text-sm font-medium tracking-wide flex items-center gap-2"><span class="material-symbols-outlined text-xs text-tertiary-fixed">short_text</span>RESPONSE CONCISENESS</label>
+            <span class="text-tertiary-fixed text-xs font-mono bg-tertiary-fixed/10 px-2 py-1 rounded">BALANCED</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="text-[10px] font-mono text-on-surface-variant">MINIMAL</span>
+            <input class="flex-grow accent-tertiary-fixed" max="100" min="0" type="range" value="40"/>
+            <span class="text-[10px] font-mono text-on-surface-variant">ELABORATE</span>
+          </div>
+        </div>
+        <div class="bg-surface-container-low rounded-xl p-6 flex items-center justify-between">
+          <div class="space-y-1">
+            <label class="font-headline text-sm font-medium tracking-wide flex items-center gap-2"><span class="material-symbols-outlined text-xs text-primary">chat_bubble</span>EXTENDED VERBOSITY</label>
+            <p class="text-xs text-on-surface-variant">Force the system to include thought traces and reasoning steps.</p>
+          </div>
+          <button class="w-12 h-6 rounded-full bg-surface-container-highest relative flex items-center px-1 transition-colors">
+            <div class="w-4 h-4 rounded-sm bg-primary-container shadow-[0_0_8px_rgba(0,229,255,0.6)] translate-x-6"></div>
+          </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-surface-container-low rounded-xl p-6 border-b-2 border-error/20">
+            <div class="flex justify-between items-center mb-4">
+              <label class="font-headline text-xs font-bold tracking-widest text-on-surface-variant">SAFETY LEVEL</label>
+              <span class="material-symbols-outlined text-error text-lg">gpp_maybe</span>
+            </div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between"><span class="text-[10px] text-on-surface">HARMFUL CONTENT</span><div class="w-8 h-4 bg-error/20 rounded-full flex items-center px-0.5"><div class="w-3 h-3 bg-error rounded-sm"></div></div></div>
+              <div class="flex items-center justify-between"><span class="text-[10px] text-on-surface">BIAS MITIGATION</span><div class="w-8 h-4 bg-tertiary-fixed/20 rounded-full flex items-center justify-end px-0.5"><div class="w-3 h-3 bg-tertiary-fixed rounded-sm"></div></div></div>
+            </div>
+          </div>
+          <div class="bg-surface-container-low rounded-xl p-6 border-b-2 border-secondary/20 flex flex-col justify-center gap-4">
+            <button class="bg-primary/5 hover:bg-primary/10 border border-primary/20 text-primary py-2 px-4 rounded-lg font-headline text-xs tracking-widest transition-all">RESET DEFAULTS</button>
+            <button onclick="goTo('page-restore')" class="bg-gradient-to-r from-primary to-primary-container text-on-primary py-2 px-4 rounded-lg font-headline text-xs font-bold tracking-widest shadow-[0_4px_15px_rgba(0,229,255,0.3)] hover:scale-[1.02] transition-transform">APPLY ENGINE CHANGES</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="lg:col-span-5 flex flex-col">
+      <div class="flex items-center gap-2 mb-4">
+        <span class="material-symbols-outlined text-secondary-fixed-dim">history_edu</span>
+        <h2 class="font-headline text-xl font-bold tracking-tight uppercase text-on-surface">Restoration History</h2>
+      </div>
+      <div class="bg-surface-container-low rounded-2xl p-6 flex-grow border border-white/5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-4 opacity-10"><span class="material-symbols-outlined text-8xl">settings_backup_restore</span></div>
+        <div class="relative space-y-8 overflow-y-auto max-h-[600px] pr-2">
+          <div class="absolute left-3 top-2 bottom-2 w-px bg-gradient-to-b from-primary/50 via-secondary/50 to-transparent"></div>
+          <div class="relative pl-10">
+            <div class="absolute left-0 top-1 w-6 h-6 rounded bg-surface-container-high border border-primary/40 flex items-center justify-center z-10 shadow-[0_0_10px_rgba(0,218,243,0.2)]"><span class="material-symbols-outlined text-[14px] text-primary">auto_fix_high</span></div>
+            <div class="space-y-2">
+              <div class="flex justify-between items-start"><span class="text-[10px] font-mono text-on-surface-variant">OCT 24, 2077 | 04:12 UTC</span><span class="text-[9px] bg-tertiary-fixed/10 text-tertiary-fixed px-1.5 py-0.5 rounded border border-tertiary-fixed/20">SUCCESS</span></div>
+              <h3 class="font-headline text-sm font-bold text-on-surface uppercase tracking-wide">Tono Restoration</h3>
+              <p class="text-xs text-on-surface-variant font-light">Neutralized emotional variance peaks detected in sub-routine 409. Semantic drift corrected to baseline 0.04.</p>
+            </div>
+          </div>
+          <div class="relative pl-10">
+            <div class="absolute left-0 top-1 w-6 h-6 rounded bg-surface-container-high border border-secondary/40 flex items-center justify-center z-10"><span class="material-symbols-outlined text-[14px] text-secondary">psychology_alt</span></div>
+            <div class="space-y-2">
+              <div class="flex justify-between items-start"><span class="text-[10px] font-mono text-on-surface-variant">OCT 22, 2077 | 18:45 UTC</span><span class="text-[9px] bg-tertiary-fixed/10 text-tertiary-fixed px-1.5 py-0.5 rounded border border-tertiary-fixed/20">SUCCESS</span></div>
+              <h3 class="font-headline text-sm font-bold text-on-surface uppercase tracking-wide">Razonamiento Refresh</h3>
+              <p class="text-xs text-on-surface-variant font-light">Logic gates re-aligned after recursive feedback loop.</p>
+            </div>
+          </div>
+          <div class="relative pl-10 opacity-60">
+            <div class="absolute left-0 top-1 w-6 h-6 rounded bg-surface-container-high border border-error/40 flex items-center justify-center z-10"><span class="material-symbols-outlined text-[14px] text-error">warning</span></div>
+            <div class="space-y-2">
+              <div class="flex justify-between items-start"><span class="text-[10px] font-mono text-on-surface-variant">OCT 20, 2077 | 11:30 UTC</span><span class="text-[9px] bg-error/10 text-error px-1.5 py-0.5 rounded border border-error/20">ABORTED</span></div>
+              <h3 class="font-headline text-sm font-bold text-on-surface uppercase tracking-wide">Core Sync</h3>
+              <p class="text-xs text-on-surface-variant font-light">Manual interruption due to unexpected power fluctuation in primary node.</p>
+            </div>
+          </div>
+          <div class="relative pl-10">
+            <div class="absolute left-0 top-1 w-6 h-6 rounded bg-surface-container-high border border-primary/40 flex items-center justify-center z-10"><span class="material-symbols-outlined text-[14px] text-primary">tune</span></div>
+            <div class="space-y-2">
+              <div class="flex justify-between items-start"><span class="text-[10px] font-mono text-on-surface-variant">OCT 18, 2077 | 09:12 UTC</span><span class="text-[9px] bg-tertiary-fixed/10 text-tertiary-fixed px-1.5 py-0.5 rounded border border-tertiary-fixed/20">SUCCESS</span></div>
+              <h3 class="font-headline text-sm font-bold text-on-surface uppercase tracking-wide">Parametric Rollback</h3>
+              <p class="text-xs text-on-surface-variant font-light">Restored previous creativity thresholds (v.2.4.1) following user performance review.</p>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 pt-6 border-t border-white/5 flex justify-center">
+          <button class="flex items-center gap-2 text-[10px] font-headline font-bold tracking-widest text-primary-container hover:text-white transition-colors">EXPORT EVENT LOG <span class="material-symbols-outlined text-xs">download</span></button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <nav class="fixed bottom-0 left-0 w-full h-16 flex justify-around items-center px-4 pb-2 bg-[#181c22]/80 backdrop-blur-lg border-t border-white/5 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] z-50 bottom-nav">
+    <div onclick="goTo('page-login')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all p-2 rounded-xl cursor-pointer"><span class="material-symbols-outlined text-xl">hub</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">Connect</span></div>
+    <div onclick="goTo('page-restore')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all p-2 rounded-xl cursor-pointer"><span class="material-symbols-outlined text-xl">settings_backup_restore</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">Restore</span></div>
+    <div class="nav-item text-cyan-400 bg-cyan-400/10 rounded-xl py-1 px-3 shadow-[inset_0_0_10px_rgba(0,229,255,0.2)]"><span class="material-symbols-outlined text-xl">tune</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">Controls</span></div>
+    <div onclick="goTo('page-diagnostic')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all p-2 rounded-xl cursor-pointer"><span class="material-symbols-outlined text-xl">history_edu</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">History</span></div>
+    <div onclick="goTo('page-forge')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all p-2 rounded-xl cursor-pointer"><span class="material-symbols-outlined text-xl">psychology_alt</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">Forge</span></div>
+  </nav>
+</div>
+
+<!-- ============ PAGE 4: DIAGNOSTIC ============ -->
+<div class="page" id="page-diagnostic">
+  <header class="fixed top-0 w-full z-50 bg-[#10141a]/60 backdrop-blur-xl bg-gradient-to-b from-[#181c22] to-transparent shadow-[0_20px_40px_rgba(0,218,243,0.08)] flex items-center justify-between px-6 h-20">
+    <div class="flex items-center gap-4">
+      <span class="material-symbols-outlined text-cyan-400">terminal</span>
+      <h1 class="font-headline tracking-tight text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#c3f5ff] to-[#00e5ff]">AETHERIS OS</h1>
+    </div>
+    <div class="flex items-center gap-6">
+      <div class="hidden md:flex items-center gap-8 text-slate-500 font-headline font-medium tracking-wide">
+        <a onclick="goTo('page-login')" class="hover:text-cyan-300 transition-colors duration-300 cursor-pointer">Connect</a>
+        <a class="text-cyan-400 drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">Restore</a>
+        <a onclick="goTo('page-controls')" class="hover:text-cyan-300 transition-colors duration-300 cursor-pointer">Controls</a>
+      </div>
+      <div class="w-10 h-10 rounded-full overflow-hidden border border-white/10 ring-2 ring-primary/20 bg-surface-container-high flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">person</span>
+      </div>
+    </div>
+  </header>
+  <main class="pt-28 pb-32 px-6 max-w-7xl mx-auto flex-1">
+    <section class="mb-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-2 h-2 rounded-full bg-error animate-pulse shadow-[0_0_8px_#ffb4ab]"></span>
+            <span class="text-error font-headline text-sm font-bold tracking-[0.2em] uppercase">System Critical</span>
+          </div>
+          <h2 class="font-headline text-5xl md:text-7xl font-bold text-on-surface tracking-tighter mb-4">Diagnostic Analysis</h2>
+          <p class="text-on-surface-variant max-w-xl text-lg leading-relaxed">Gemini LLM Session #882-QX. Structural integrity compromised. Neural pathways exhibiting high resistance and feedback loops.</p>
+        </div>
+        <div class="bg-surface-container-high p-8 rounded-xl border border-white/5 shadow-2xl min-w-[240px] flex flex-col items-center justify-center">
+          <span class="text-on-surface-variant font-headline uppercase tracking-widest text-xs mb-2">Overall Status</span>
+          <span class="text-error font-headline text-4xl font-black tracking-tighter">Impaired</span>
+          <div class="mt-4 w-full h-1 bg-surface-container-lowest rounded-full overflow-hidden">
+            <div class="h-full bg-error w-[88%] shadow-[0_0_12px_#ffb4ab]"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+      <div class="md:col-span-8 bg-surface-container-low rounded-2xl p-8 border border-white/5 relative overflow-hidden group hover:bg-surface-container-high transition-all duration-500">
+        <div class="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity"><span class="material-symbols-outlined text-9xl">layers</span></div>
+        <div class="relative z-10 h-full flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-8"><span class="px-3 py-1 bg-error/10 text-error rounded-full text-xs font-bold font-headline uppercase tracking-wider">Warning</span><span class="text-error font-headline text-3xl font-bold">85%</span></div>
+            <h3 class="font-headline text-3xl font-bold text-on-surface mb-2">Context Overload</h3>
+            <p class="text-on-surface-variant max-w-md">The working memory of the session has exceeded stable thresholds. Input tokens are colliding with retrieval vectors, causing hallucinatory drift.</p>
+          </div>
+          <div class="mt-8 grid grid-cols-6 gap-2">
+            <div class="h-12 bg-error shadow-[0_0_15px_rgba(255,180,171,0.4)]"></div><div class="h-12 bg-error"></div><div class="h-12 bg-error"></div><div class="h-12 bg-error"></div><div class="h-12 bg-error/40"></div><div class="h-12 bg-white/5"></div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-4 bg-surface-container-low rounded-2xl p-8 border border-white/5 flex flex-col justify-between group hover:bg-surface-container-high transition-all">
+        <div>
+          <div class="flex items-center justify-between mb-8"><span class="px-3 py-1 bg-tertiary-container/10 text-tertiary-fixed-dim rounded-full text-xs font-bold font-headline uppercase tracking-wider">Moderate</span><span class="text-tertiary-fixed-dim font-headline text-3xl font-bold">40%</span></div>
+          <h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Role Bias</h3>
+          <p class="text-on-surface-variant text-sm">Synthetic personality constraints are narrowing response variety.</p>
+        </div>
+        <div class="mt-6 flex justify-center py-4">
+          <div class="relative w-32 h-32">
+            <div class="absolute inset-0 border-4 border-white/5 rounded-full"></div>
+            <div class="absolute inset-0 border-4 border-tertiary-fixed-dim rounded-full border-t-transparent -rotate-45"></div>
+            <div class="absolute inset-0 flex items-center justify-center"><span class="material-symbols-outlined text-tertiary-fixed-dim text-4xl">psychology</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="md:col-span-6 bg-surface-container-low rounded-2xl p-8 border border-white/5 group hover:bg-surface-container-high transition-all">
+        <div class="flex items-center justify-between mb-8"><span class="px-3 py-1 bg-primary-container/10 text-primary-fixed-dim rounded-full text-xs font-bold font-headline uppercase tracking-wider">High</span><span class="material-symbols-outlined text-primary-fixed-dim">rebase_edit</span></div>
+        <h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Logic Redundancy</h3>
+        <p class="text-on-surface-variant mb-6">Recursive loops detected in reasoning steps. The model is repeating axiomatic truths without progress.</p>
+        <div class="space-y-3">
+          <div class="h-2 bg-primary-fixed-dim/30 rounded-full w-full"></div>
+          <div class="h-2 bg-primary-fixed-dim/30 rounded-full w-[90%]"></div>
+          <div class="h-2 bg-primary-fixed-dim rounded-full w-[75%] shadow-[0_0_10px_#00daf3]"></div>
+        </div>
+      </div>
+      <div class="md:col-span-6 bg-surface-container-low rounded-2xl p-8 border border-white/5 group hover:bg-surface-container-high transition-all">
+        <div class="flex items-center justify-between mb-8"><span class="px-3 py-1 bg-error/10 text-error rounded-full text-xs font-bold font-headline uppercase tracking-wider">Warning</span><span class="material-symbols-outlined text-error">grid_view</span></div>
+        <h3 class="font-headline text-2xl font-bold text-on-surface mb-2">Token Fragmentation</h3>
+        <p class="text-on-surface-variant mb-6">Syntax parsing error rate increasing. High probability of word-salad output in next 500 tokens.</p>
+        <div class="flex gap-1 flex-wrap">
+          <div class="w-4 h-4 bg-error shadow-[0_0_8px_#ffb4ab]"></div><div class="w-4 h-4 bg-error/60"></div><div class="w-4 h-4 bg-error"></div><div class="w-4 h-4 bg-white/10"></div><div class="w-4 h-4 bg-error/80"></div><div class="w-4 h-4 bg-white/5"></div><div class="w-4 h-4 bg-error"></div><div class="w-4 h-4 bg-error/40"></div><div class="w-4 h-4 bg-error"></div><div class="w-4 h-4 bg-white/10"></div><div class="w-4 h-4 bg-error shadow-[0_0_8px_#ffb4ab]"></div><div class="w-4 h-4 bg-error"></div><div class="w-4 h-4 bg-error/20"></div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-16 flex flex-col items-center">
+      <div class="mb-6 p-4 bg-surface-container-highest/50 backdrop-blur-md rounded-xl border border-white/5 text-center max-w-lg">
+        <p class="text-sm font-label text-on-surface-variant italic">"Aetheris recommends immediate realignment of the neural manifold to prevent permanent semantic decay."</p>
+      </div>
+      <button onclick="goTo('page-restore')" class="group relative px-12 py-5 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold text-lg uppercase tracking-[0.3em] rounded-md transition-all active:scale-95 hover:shadow-[0_0_40px_rgba(0,229,255,0.4)] overflow-hidden">
+        <span class="relative z-10 flex items-center gap-3">Go to Restoration <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">bolt</span></span>
+        <div class="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 skew-x-12"></div>
+      </button>
+    </div>
+  </main>
+  <nav class="fixed bottom-0 left-0 w-full h-16 flex justify-around items-center px-4 pb-2 bg-[#181c22]/80 backdrop-blur-lg border-t border-white/5 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] z-50 bottom-nav">
+    <button onclick="goTo('page-login')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all active:scale-90 duration-150"><span class="material-symbols-outlined">hub</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">Connect</span></button>
+    <button onclick="goTo('page-restore')" class="nav-item text-cyan-400 bg-cyan-400/10 rounded-xl py-1 px-3 shadow-[inset_0_0_10px_rgba(0,229,255,0.2)] active:scale-90 duration-150"><span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">settings_backup_restore</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">Restore</span></button>
+    <button onclick="goTo('page-controls')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all active:scale-90 duration-150"><span class="material-symbols-outlined">tune</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">Controls</span></button>
+    <button class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all active:scale-90 duration-150"><span class="material-symbols-outlined">history_edu</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">History</span></button>
+    <button onclick="goTo('page-forge')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all active:scale-90 duration-150"><span class="material-symbols-outlined">psychology_alt</span><span class="font-body text-[10px] uppercase tracking-wider mt-1">Forge</span></button>
+  </nav>
+  <div class="fixed inset-0 pointer-events-none z-[-1] overflow-hidden">
+    <div class="absolute top-[-10%] right-[-10%] w-[60%] h-[60%] bg-primary/5 blur-[120px] rounded-full"></div>
+    <div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-secondary/5 blur-[100px] rounded-full"></div>
+    <div class="absolute inset-0 opacity-[0.02]" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 40px 40px;"></div>
+  </div>
+</div>
+
+<!-- ============ PAGE 5: FORGE ============ -->
+<div class="page" id="page-forge">
+  <header class="fixed top-0 w-full z-50 bg-[#10141a]/60 backdrop-blur-xl bg-gradient-to-b from-[#181c22] to-transparent shadow-[0_20px_40px_rgba(0,218,243,0.08)] flex items-center justify-between px-6 h-20 w-full">
+    <div class="flex items-center gap-4">
+      <span class="material-symbols-outlined text-cyan-400 text-2xl">terminal</span>
+      <h1 class="text-2xl font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-[#c3f5ff] to-[#00e5ff] font-headline">AETHERIS OS</h1>
+    </div>
+    <div class="flex items-center gap-6">
+      <nav class="hidden md:flex items-center gap-8 font-headline font-medium">
+        <a onclick="goTo('page-login')" class="text-slate-500 hover:text-cyan-300 transition-colors duration-300 cursor-pointer">Connect</a>
+        <a onclick="goTo('page-restore')" class="text-slate-500 hover:text-cyan-300 transition-colors duration-300 cursor-pointer">Restore</a>
+        <a onclick="goTo('page-controls')" class="text-slate-500 hover:text-cyan-300 transition-colors duration-300 cursor-pointer">Controls</a>
+        <a onclick="goTo('page-diagnostic')" class="text-slate-500 hover:text-cyan-300 transition-colors duration-300 cursor-pointer">History</a>
+        <a class="text-cyan-400 drop-shadow-[0_0_8px_rgba(0,229,255,0.5)]">Forge</a>
+      </nav>
+      <div class="w-10 h-10 rounded-full border border-primary/20 p-0.5 overflow-hidden bg-surface-container-high flex items-center justify-center">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1;">person</span>
+      </div>
+    </div>
+  </header>
+  <main class="flex-grow pt-28 pb-24 px-4 md:px-8 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <section class="lg:col-span-7 space-y-6">
+      <div class="space-y-2">
+        <h2 class="text-3xl font-headline font-bold text-on-surface">Forge Neural Prompt</h2>
+        <p class="text-on-surface-variant text-sm">Input raw semantic instructions to begin the optimization cycle.</p>
+      </div>
+      <div class="bg-surface-container-low p-6 rounded-xl border border-white/5 space-y-4 shadow-2xl">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-pulse"></span>
+            <span class="text-xs font-headline uppercase tracking-widest text-tertiary-fixed">Input Terminal</span>
+          </div>
+          <span class="text-xs font-label text-outline uppercase tracking-tighter">Raw Buffer: 1.2kb</span>
+        </div>
+        <div class="relative">
+          <textarea class="w-full h-64 bg-surface-container-lowest text-on-surface p-4 rounded-lg font-mono text-sm focus:outline-none focus:ring-1 focus:ring-primary-container border-b border-transparent focus:border-primary transition-all resize-none placeholder:text-outline/30">Act as a senior software architect. Explain how to build a scalable microservices architecture using Go and Kubernetes. Focus on observability and fault tolerance.</textarea>
+        </div>
+        <div class="space-y-3">
+          <label class="text-[10px] font-headline uppercase tracking-[0.2em] text-on-surface-variant">Optimization Target</label>
+          <div class="flex flex-wrap gap-2">
+            <button class="px-4 py-2 rounded-md bg-surface-container-high border border-primary/40 text-primary text-xs font-headline hover:bg-primary/10 transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">rocket_launch</span> Gemini Pro</button>
+            <button class="px-4 py-2 rounded-md bg-surface-container-high border border-white/5 text-on-surface-variant text-xs font-headline hover:border-white/20 transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">star</span> Gemini Ultra</button>
+            <button class="px-4 py-2 rounded-md bg-surface-container-high border border-white/5 text-on-surface-variant text-xs font-headline hover:border-white/20 transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">psychology</span> GPT-4</button>
+            <button class="px-4 py-2 rounded-md bg-surface-container-high border border-white/5 text-on-surface-variant text-xs font-headline hover:border-white/20 transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">temp_preferences_custom</span> Claude 3</button>
+          </div>
+        </div>
+        <button class="w-full py-4 rounded-xl bg-gradient-to-r from-[#00626e] to-primary-container text-on-primary font-headline font-bold text-sm tracking-widest uppercase hover:shadow-[0_0_20px_rgba(0,229,255,0.4)] active:scale-[0.98] transition-all flex items-center justify-center gap-3">
+          <span class="material-symbols-outlined">auto_awesome</span>Optimize to 100%
+        </button>
+      </div>
+    </section>
+    <section class="lg:col-span-5 flex flex-col gap-6">
+      <div class="glass-card flex-grow p-6 rounded-xl border border-white/10 flex flex-col gap-6">
+        <div class="flex items-center justify-between border-b border-white/5 pb-4">
+          <h3 class="font-headline font-bold text-lg text-primary">Refined Prompt</h3>
+          <div class="flex items-center gap-1 bg-tertiary-container/10 px-2 py-1 rounded text-[10px] text-tertiary-fixed font-bold uppercase tracking-wider"><span class="material-symbols-outlined text-[12px]">check_circle</span>Verified 100%</div>
+        </div>
+        <div class="flex-grow space-y-4 overflow-y-auto max-h-[400px] pr-2">
+          <div class="bg-surface-container-lowest p-5 rounded-lg border-l-2 border-primary-container leading-relaxed">
+            <p class="text-sm text-on-surface mb-4 italic">System Role Configuration:</p>
+            <p class="text-sm text-on-surface-variant">"Assume the persona of a Distinguished Staff Software Engineer with 15+ years of expertise in cloud-native distributed systems."</p>
+            <div class="h-px bg-white/5 my-4"></div>
+            <p class="text-sm text-on-surface mb-2 italic">Instruction Matrix:</p>
+            <ul class="text-sm text-on-surface-variant list-disc list-inside space-y-2">
+              <li>Deconstruct the implementation of a microservices ecosystem using Go (Golang).</li>
+              <li>Detail the orchestration strategy via Kubernetes manifests.</li>
+              <li>Prioritize 'Observability-First' design patterns (Prometheus/Grafana/OpenTelemetry).</li>
+              <li>Establish clear 'Fault Tolerance' protocols including circuit breakers and retry logic.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="space-y-3 mt-auto">
+          <button class="w-full py-3 px-4 bg-secondary-container text-on-secondary-container rounded-lg font-headline font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-secondary-container/80 transition-all active:scale-95"><span class="material-symbols-outlined">integration_instructions</span>Integrate into Gemini Assistant</button>
+          <button class="w-full py-3 px-4 bg-surface-container-highest text-on-surface rounded-lg font-headline font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2 border border-white/5 hover:border-white/20 transition-all active:scale-95"><span class="material-symbols-outlined">content_copy</span>Copy to Clipboard</button>
+        </div>
+      </div>
+      <div class="bg-surface-container-low p-4 rounded-xl border border-white/5 flex items-center justify-around">
+        <div class="text-center"><div class="text-2xl font-headline font-bold text-primary">89%</div><div class="text-[10px] uppercase tracking-tighter text-outline">Clarity Gain</div></div>
+        <div class="w-px h-8 bg-white/10"></div>
+        <div class="text-center"><div class="text-2xl font-headline font-bold text-tertiary-fixed">4.2x</div><div class="text-[10px] uppercase tracking-tighter text-outline">Intent Depth</div></div>
+        <div class="w-px h-8 bg-white/10"></div>
+        <div class="text-center"><div class="text-2xl font-headline font-bold text-secondary">0.4s</div><div class="text-[10px] uppercase tracking-tighter text-outline">Neural Latency</div></div>
+      </div>
+    </section>
+  </main>
+  <nav class="md:hidden fixed bottom-0 left-0 w-full h-16 bg-[#181c22]/80 backdrop-blur-lg border-t border-white/5 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] flex justify-around items-center px-4 pb-2 z-50 bottom-nav">
+    <a onclick="goTo('page-login')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all active:scale-90 duration-150 cursor-pointer"><span class="material-symbols-outlined">hub</span><span class="font-body text-[10px] uppercase tracking-wider">Connect</span></a>
+    <a onclick="goTo('page-restore')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all active:scale-90 duration-150 cursor-pointer"><span class="material-symbols-outlined">settings_backup_restore</span><span class="font-body text-[10px] uppercase tracking-wider">Restore</span></a>
+    <a onclick="goTo('page-controls')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all active:scale-90 duration-150 cursor-pointer"><span class="material-symbols-outlined">tune</span><span class="font-body text-[10px] uppercase tracking-wider">Controls</span></a>
+    <a onclick="goTo('page-diagnostic')" class="nav-item text-slate-500 opacity-70 hover:bg-white/5 transition-all active:scale-90 duration-150 cursor-pointer"><span class="material-symbols-outlined">history_edu</span><span class="font-body text-[10px] uppercase tracking-wider">History</span></a>
+    <a class="nav-item text-cyan-400 bg-cyan-400/10 rounded-xl py-1 px-3 shadow-[inset_0_0_10px_rgba(0,229,255,0.2)] active:scale-90 duration-150"><span class="material-symbols-outlined">psychology_alt</span><span class="font-body text-[10px] uppercase tracking-wider">Forge</span></a>
+  </nav>
+  <div class="fixed inset-0 pointer-events-none opacity-10 z-0">
+    <div class="absolute inset-0" style="background-image: linear-gradient(#00e5ff 1px, transparent 1px), linear-gradient(90deg, #00e5ff 1px, transparent 1px); background-size: 80px 80px;"></div>
+  </div>
+</div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js');
+  });
+}
+
+function goTo(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const target = document.getElementById(pageId);
+  if (target) {
+    target.classList.add('active');
+    window.scrollTo(0, 0);
+  }
+}
+</script>
+</body>
+</html>
